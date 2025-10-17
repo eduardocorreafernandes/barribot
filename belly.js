@@ -13,6 +13,9 @@ wppconnect.create({
   devtools: false,
   useChrome: true,
   autoClose: false,
+    browserOptions: {
+    executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+  }
 })
 .then(async (client) => {
   const state = await client.getConnectionState();
@@ -50,11 +53,11 @@ async function start(client){
             const horas = agora.getHours();
             const minutos = agora.getMinutes();
 
-            if (true) {
-                console.log("É 10:00! A função será disparada.");
+            if (horas==8 && minutos==0) {
+                console.log("É 08:00! A função será disparada.");
                 resolve(); // Finaliza a promise
             } else {
-                console.log("Ainda não é 10:00.");
+                console.log("Ainda não é 08:00.");
                 setTimeout(checar, 60000); // Tenta novamente em 1 minuto
             }
         };
