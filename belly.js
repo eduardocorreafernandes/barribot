@@ -12,7 +12,7 @@ wppconnect.create({
   headless: true,
   devtools: false,
   useChrome: true,
-   executablePath: '/usr/bin/chromium-browser',
+   executablePath: '',
   autoClose: false,
   
 })
