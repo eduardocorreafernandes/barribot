@@ -11,5 +11,8 @@
   "description": "",
   "dependencies": {
     "@wppconnect-team/wppconnect": "^1.37.1"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.7.10"
   }
 }
