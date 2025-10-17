@@ -11,8 +11,7 @@ wppconnect.create({
   },
   headless: true,
   devtools: false,
-  useChrome: true,
-   executablePath: '',
+  useChrome: false,
   autoClose: false,
   
 })
