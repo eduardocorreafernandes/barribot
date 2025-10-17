@@ -12,10 +12,9 @@ wppconnect.create({
   headless: true,
   devtools: false,
   useChrome: true,
+   executablePath: '/usr/bin/chromium-browser',
   autoClose: false,
-    browserOptions: {
-    executablePath: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
-  }
+  
 })
 .then(async (client) => {
   const state = await client.getConnectionState();
