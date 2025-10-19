@@ -1,4 +1,10 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
+import puppeteer from 'puppeteer';
+
+const browser = await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox'],
+});
 
 wppconnect.create({
   session: 'minha-sessao',
@@ -51,7 +57,7 @@ async function start(client){
             const horas = agora.getHours();
             const minutos = agora.getMinutes();
 
-            if (horas==8 && minutos==0) {
+            if (true) {
                 console.log("É 08:00! A função será disparada.");
                 resolve(); // Finaliza a promise
             } else {
