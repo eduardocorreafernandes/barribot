@@ -1,7 +1,12 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
 const path = require('path');
 const fs = require('fs');
-const sessionPath = path.join(__dirname, 'tokens'); // pasta de tokens
+const sessionPath = process.env.TOKENS_PATH || path.join(__dirname, 'tokens'); 
+
+// Certifica que a pasta existe
+if (!fs.existsSync(sessionPath)) {
+  fs.mkdirSync(sessionPath, { recursive: true });
+}
 
 wppconnect.create({
   session: 'minha-sessao',
