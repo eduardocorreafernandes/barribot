@@ -1,5 +1,6 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
 const path = require('path');
+const fs = require('fs');
 const sessionPath = path.join(__dirname, 'tokens'); // pasta de tokens
 
 wppconnect.create({
@@ -21,6 +22,7 @@ wppconnect.create({
   useChrome: false,
   autoClose: false,
   //pra funcionar no terminal, tira essa opção
+  
    puppeteerOptions: {
     args: [
       '--no-sandbox',
@@ -30,7 +32,7 @@ wppconnect.create({
       '--single-process',
       '--no-zygote'
     ],
-  }
+  } 
   
 })
 .then(async (client) => {
