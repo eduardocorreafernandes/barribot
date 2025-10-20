@@ -6,8 +6,9 @@ wppconnect.create({
   session: 'minha-sessao',
   sessionDataPath: sessionPath,
   catchQR: (base64Qrimg, asciiQR) => {
-    console.log('Escaneie o QR Code abaixo:');
-    console.log(asciiQR);
+    
+    //console.log('Escaneie o QR Code abaixo:');
+    //console.log(asciiQR);
     const base64Data = base64Qrimg.replace(/^data:image\/png;base64,/, '');
     fs.writeFileSync('qrcode.png', base64Data, 'base64');
     console.log('QR Code salvo como qrcode.png, abra no celular para escanear!');
