@@ -1,5 +1,4 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
-const puppeteer = require('puppeteer');
 
 wppconnect.create({
   session: 'minha-sessao',
@@ -14,6 +13,7 @@ wppconnect.create({
   devtools: false,
   useChrome: false,
   autoClose: false,
+  //pra funcionar no terminal, tira essa opção
    puppeteerOptions: {
     args: [
       '--no-sandbox',
