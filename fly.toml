@@ -5,9 +5,11 @@
 
 app = 'barribot-7xblya'
 primary_region = 'gru'
-
+[mounts]
+  source = "wppdata"
+  destination = "/app/tokens"
 [build]
-
+ image = "node:20"
 [http_service]
   internal_port = 3000
   force_https = true
