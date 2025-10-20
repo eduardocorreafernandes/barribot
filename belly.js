@@ -8,11 +8,11 @@ wppconnect.create({
   sessionDataPath: sessionPath,
   catchQR: (base64Qrimg, asciiQR) => {
     
-    //console.log('Escaneie o QR Code abaixo:');
-    //console.log(asciiQR);
-    const base64Data = base64Qrimg.replace(/^data:image\/png;base64,/, '');
-    fs.writeFileSync('qrcode.png', base64Data, 'base64');
-    console.log('QR Code salvo como qrcode.png, abra no celular para escanear!');
+    console.log('Escaneie o QR Code abaixo:');
+    console.log(asciiQR);
+    //const base64Data = base64Qrimg.replace(/^data:image\/png;base64,/, '');
+    //fs.writeFileSync('qrcode.png', base64Data, 'base64');
+    //console.log('QR Code salvo como qrcode.png, abra no celular para escanear!');
   },
   statusFind: (statusSession, session) => {
     console.log('Status da sessão:', statusSession);
@@ -22,7 +22,7 @@ wppconnect.create({
   useChrome: false,
   autoClose: false,
   //pra funcionar no terminal, tira essa opção
-  
+  /*
    puppeteerOptions: {
     args: [
       '--no-sandbox',
@@ -32,7 +32,7 @@ wppconnect.create({
       '--single-process',
       '--no-zygote'
     ],
-  } 
+  } */
   
 })
 .then(async (client) => {
