@@ -1,11 +1,16 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
+const path = require('path');
+const sessionPath = path.join(__dirname, 'tokens'); // pasta de tokens
 
 wppconnect.create({
   session: 'minha-sessao',
-  tokenStore: '/app/tokens',
+  sessionDataPath: sessionPath,
   catchQR: (base64Qrimg, asciiQR) => {
     console.log('Escaneie o QR Code abaixo:');
     console.log(asciiQR);
+    const base64Data = base64Qrimg.replace(/^data:image\/png;base64,/, '');
+    fs.writeFileSync('qrcode.png', base64Data, 'base64');
+    console.log('QR Code salvo como qrcode.png, abra no celular para escanear!');
   },
   statusFind: (statusSession, session) => {
     console.log('Status da sessão:', statusSession);
