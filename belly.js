@@ -22,6 +22,7 @@ wppconnect.create({
   statusFind: (statusSession, session) => {
     console.log('Status da sessão:', statusSession);
   },
+  qrRefreshInterval: 5 * 60 * 1000 ,// 5 minutos
   headless: true,
   devtools: false,
   useChrome: false,
