@@ -14,6 +14,16 @@ wppconnect.create({
   devtools: false,
   useChrome: false,
   autoClose: false,
+   puppeteerOptions: {
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--single-process',
+      '--no-zygote'
+    ],
+  }
   
 })
 .then(async (client) => {
