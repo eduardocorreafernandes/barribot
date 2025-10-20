@@ -1,11 +1,6 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
 const puppeteer = require('puppeteer');
 
-const browser = await puppeteer.launch({
-  headless: true,
-  args: ['--no-sandbox', '--disable-setuid-sandbox'],
-});
-
 wppconnect.create({
   session: 'minha-sessao',
   catchQR: (base64Qrimg, asciiQR) => {
