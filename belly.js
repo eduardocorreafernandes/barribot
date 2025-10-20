@@ -1,11 +1,10 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
 const path = require('path');
 const fs = require('fs');
-const open = require('open'); // npm i open
 
 const sessionPath = process.env.TOKENS_PATH || path.join(__dirname, 'tokens');
 
-// Certifica que a pasta existe
+// Certifica que a pasta de tokens existe
 if (!fs.existsSync(sessionPath)) {
   fs.mkdirSync(sessionPath, { recursive: true });
 }
@@ -13,16 +12,14 @@ if (!fs.existsSync(sessionPath)) {
 wppconnect.create({
   session: 'minha-sessao',
   sessionDataPath: sessionPath,
-  catchQR: async (base64Qrimg, asciiQR) => {
-    console.log('QR Code gerado, abrindo no navegador...');
-    
-    // Salva o QR Code como PNG
-    const base64Data = base64Qrimg.replace(/^data:image\/png;base64,/, '');
-    const qrPath = path.join(sessionPath, 'qrcode.png');
-    fs.writeFileSync(qrPath, base64Data, 'base64');
+  catchQR: (base64Qrimg, asciiQR) => {
+    // QR Code no terminal (ASCII)
+    console.log('QR Code ASCII:');
+    console.log(asciiQR);
 
-    // Abre automaticamente no navegador
-    await open(qrPath);
+    // QR Code em base64 (copie e abra no navegador)
+    console.log('\nQR Code Base64 (abra no navegador como data:image/png;base64,...):');
+    console.log(base64Qrimg);
   },
   statusFind: (statusSession, session) => {
     console.log('Status da sessão:', statusSession);
@@ -60,21 +57,24 @@ wppconnect.create({
     }
   });
 })
-.catch(err => console.log(err));
+.catch(err => console.log('Erro ao iniciar WPPConnect:', err));
 
-// Função principal do bot
-async function start(client){
-  try{
+async function start(client) {
+  try {
+    // Função de disparo baseado em horário
     const disparar_funcao = () => new Promise((resolve) => {
       const checar = () => {
         const agora = new Date();
         const horas = agora.getHours();
+        const minutos = agora.getMinutes();
 
-        if (true) { // Coloque sua condição de horário real
-          console.log("Hora certa! Disparando função.");
+        // Altere a hora que quiser disparar a função
+        if (horas === 8 && minutos === 0) {
+          console.log("É 08:00! Disparando função.");
           resolve();
         } else {
-          setTimeout(checar, 60000); // tenta novamente em 1 min
+          console.log(`Ainda não é 08:00. Agora são ${horas}:${minutos}`);
+          setTimeout(checar, 60000); // verifica a cada 1 minuto
         }
       };
       checar();
@@ -83,17 +83,17 @@ async function start(client){
     const ativar = async () => {
       await disparar_funcao();
       const result = await client.sendPollMessage(
-        '120363399351241774@g.us',
-        'Ração da belly',
+        '120363399351241774@g.us', // altere para o JID do grupo
+        'Ração da Belly',
         ['Manhã', 'Tarde', 'Noite']
       );
       console.log("Função ativada.", result);
     };
 
     ativar();
-  }
-  catch(err){
-    console.log('Erro:', err);
+  } catch(err) {
+    console.log('Erro na função start:', err);
   }
 }
+
 
