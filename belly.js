@@ -2,6 +2,7 @@ const wppconnect = require('@wppconnect-team/wppconnect');
 
 wppconnect.create({
   session: 'minha-sessao',
+  tokenStore: '/app/tokens',
   catchQR: (base64Qrimg, asciiQR) => {
     console.log('Escaneie o QR Code abaixo:');
     console.log(asciiQR);
