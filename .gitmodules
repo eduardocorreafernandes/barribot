@@ -1,0 +1,3 @@
+[submodule "tokens-belly"]
+	path = tokens-belly
+	url = https://github.com/eduardocorreafernandes/tokens-belly
