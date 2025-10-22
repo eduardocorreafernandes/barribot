@@ -4,34 +4,26 @@ const fs = require('fs');
 const unzipper = require('unzipper');
 const { execSync } = require('child_process');
 
-const sessionPath = path.join(__dirname, 'tokens');
+const sessionPath =path.join(__dirname, 'tokens');
 const zipPath = path.join(__dirname, 'tokens.zip');
-const repoPath = path.join(__dirname, 'tokens-belly');
+const tokensRepo = process.env.TOKENS_REPO;
+const githubToken = process.env.GITHUB_TOKEN;
 
-// ==== Passo 1: Clonar o repositório privado se não existir ====
-const token = process.env.GITHUB_TOKEN;
-const repoUrl = `https://${token}@github.com/eduardocorreafernandes/tokens-belly.git`;
+// Certifica que a pasta existe
+if (!fs.existsSync(sessionPath)) fs.mkdirSync(sessionPath, { recursive: true });
 
-if (!fs.existsSync(repoPath)) {
-  console.log('Clonando repositório privado tokens-belly...');
-  execSync(`git clone ${repoUrl} ${repoPath}`, { stdio: 'inherit' });
+// Clona o repositório privado e pega o zip
+if (!fs.existsSync(zipPath)) {
+  console.log('Baixando tokens do repositório privado...');
+  execSync(`git clone https://${githubToken}@${tokensRepo.replace('https://','')} temp-tokens`, { stdio: 'inherit' });
+  fs.copyFileSync('temp-tokens/tokens.zip', zipPath);
+  execSync('rm -rf temp-tokens'); // remove pasta temporária
 }
 
-// ==== Passo 2: Pegar o zip dos tokens e descompactar ====
-const zipFilePath = path.join(repoPath, 'tokens.zip');
-if (fs.existsSync(zipFilePath)) {
-  console.log('Descompactando tokens.zip...');
-  fs.createReadStream(zipFilePath)
-    .pipe(unzipper.Extract({ path: sessionPath }))
-    .on('close', () => console.log('Tokens descompactados!'));
-} else {
-  console.log('tokens.zip não encontrado no repositório privado!');
-}
-
-// ==== Passo 3: Certifica que a pasta existe ====
-if (!fs.existsSync(sessionPath)) {
-  fs.mkdirSync(sessionPath, { recursive: true });
-}
+// Extrai o zip
+fs.createReadStream(zipPath)
+  .pipe(unzipper.Extract({ path: sessionPath }))
+  .on('close', () => console.log('Tokens descompactados!'));
 
 wppconnect.create({
   session: 'minha-sessao',
