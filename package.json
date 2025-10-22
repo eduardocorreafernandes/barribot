@@ -4,8 +4,6 @@
   "main": "belly.js",
   "scripts": {
     "start": "node belly.js"
-    
-   
   },
   "keywords": [],
   "author": "",
@@ -13,6 +11,7 @@
   "description": "",
   "dependencies": {
     "@wppconnect-team/wppconnect": "^1.37.1",
-    "puppeteer": "^24.25.0"
+    "puppeteer": "^24.25.0",
+    "unzipper": "^0.12.3"
   }
 }
