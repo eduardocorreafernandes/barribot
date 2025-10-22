@@ -30,9 +30,9 @@ wppconnect.create({
     console.log('Status da sessão:', statusSession);
   },
   qrRefreshInterval: 5 * 60 * 1000 ,// 5 minutos
-  headless: false,
+  headless: true,
   devtools: false,
-  useChrome: true,
+  useChrome: false,
   autoClose: false,
   //pra funcionar no terminal, tira essa opção
   
