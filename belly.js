@@ -1,9 +1,34 @@
 const wppconnect = require('@wppconnect-team/wppconnect');
 const path = require('path');
 const fs = require('fs');
-const sessionPath = process.env.TOKENS_PATH || path.join(__dirname, 'tokens'); 
+const unzipper = require('unzipper');
+const { execSync } = require('child_process');
 
-// Certifica que a pasta existe
+const sessionPath = path.join(__dirname, 'tokens');
+const zipPath = path.join(__dirname, 'tokens.zip');
+const repoPath = path.join(__dirname, 'tokens-belly');
+
+// ==== Passo 1: Clonar o repositório privado se não existir ====
+const token = process.env.GITHUB_TOKEN;
+const repoUrl = `https://${token}@github.com/eduardocorreafernandes/tokens-belly.git`;
+
+if (!fs.existsSync(repoPath)) {
+  console.log('Clonando repositório privado tokens-belly...');
+  execSync(`git clone ${repoUrl} ${repoPath}`, { stdio: 'inherit' });
+}
+
+// ==== Passo 2: Pegar o zip dos tokens e descompactar ====
+const zipFilePath = path.join(repoPath, 'tokens.zip');
+if (fs.existsSync(zipFilePath)) {
+  console.log('Descompactando tokens.zip...');
+  fs.createReadStream(zipFilePath)
+    .pipe(unzipper.Extract({ path: sessionPath }))
+    .on('close', () => console.log('Tokens descompactados!'));
+} else {
+  console.log('tokens.zip não encontrado no repositório privado!');
+}
+
+// ==== Passo 3: Certifica que a pasta existe ====
 if (!fs.existsSync(sessionPath)) {
   fs.mkdirSync(sessionPath, { recursive: true });
 }
