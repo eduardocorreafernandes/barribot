@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "belly.js",
   "scripts": {
-    "start": "node belly.js",
-     "postinstall": "git config --global url.\"https://${GITHUB_TOKEN}@github.com/\".insteadOf \"https://github.com/\" && git submodule update --init --recursive"
+     "postinstall": "git config --global url.\"https://${GITHUB_TOKEN}@github.com/\".insteadOf \"https://github.com/\" && git submodule update --init --recursive",
+    "start": "node belly.js"
+    
    
   },
   "keywords": [],
