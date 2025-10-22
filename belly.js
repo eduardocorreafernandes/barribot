@@ -4,16 +4,31 @@ const fs = require('fs');
 const unzipper = require('unzipper');
 const { execSync } = require('child_process');
 
-const sessionPath = path.join(__dirname, 'tokens', 'minha-sessao'); // será extraído aqui
-const zipPath = path.join(__dirname, 'tokens', 'tokens.zip');
+const sessionPath = path.join(__dirname, 'tokens');
+const zipPath = path.join(__dirname, 'tokens.zip');
 
-// Descompacta os tokens se a pasta ainda não existir
-if (!fs.existsSync(sessionPath)) {
-  fs.mkdirSync(sessionPath, { recursive: true });
-  fs.createReadStream(zipPath)
-    .pipe(unzipper.Extract({ path: sessionPath }))
-    .on('close', () => console.log('Tokens descompactados!'));
+// Função que extrai o zip de forma assíncrona
+async function extractTokens() {
+  if (fs.existsSync(zipPath)) {
+    console.log('Descompactando tokens...');
+    await fs.createReadStream(zipPath)
+      .pipe(unzipper.Extract({ path: sessionPath }))
+      .promise(); // garante que só resolve quando terminar
+    console.log('Tokens descompactados!');
+  } else {
+    console.log('Nenhum tokens.zip encontrado. Será gerada nova sessão.');
+  }
 }
+
+// Função principal
+(async () => {
+  await extractTokens(); // ✅ espera descompactar antes de prosseguir
+
+  if (!fs.existsSync(sessionPath)) {
+    fs.mkdirSync(sessionPath, { recursive: true });
+  }
+
+  console.log('Iniciando cliente WPPConnect...'); 
 
 wppconnect.create({
   session: 'minha-sessao',
@@ -72,6 +87,7 @@ wppconnect.create({
   });
 })
 .catch((err) => console.log(err));
+})();
 
 
 
