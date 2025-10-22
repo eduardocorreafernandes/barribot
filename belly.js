@@ -100,7 +100,7 @@ async function start(client){
             const horas = agora.getHours();
             const minutos = agora.getMinutes();
 
-            if (true) {
+            if (horas==4 && minutos==0) {
                 console.log("É 08:00! A função será disparada.");
                 resolve(); // Finaliza a promise
             } else {
