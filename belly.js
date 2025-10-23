@@ -8,6 +8,7 @@ const sessionPath = path.join(__dirname, 'tokens');
 const zipPath = path.join(__dirname, 'tokens.zip');
 
 // Função que extrai o zip de forma assíncrona
+/*
 async function extractTokens() {
   if (fs.existsSync(zipPath)) {
     console.log('Descompactando tokens...');
@@ -29,7 +30,7 @@ async function extractTokens() {
   }
 
   console.log('Iniciando cliente WPPConnect...'); 
-
+*/
 wppconnect.create({
   session: 'minha-sessao',
   sessionDataPath: sessionPath,
@@ -50,7 +51,7 @@ wppconnect.create({
   useChrome: false,
   autoClose: false,
   //pra funcionar no terminal, tira essa opção
-  
+  /*
    puppeteerOptions: {
     args: [
       '--no-sandbox',
@@ -60,7 +61,7 @@ wppconnect.create({
       '--single-process',
       '--no-zygote'
     ],
-  } 
+  } */
   
 })
 .then(async (client) => {
@@ -87,7 +88,7 @@ wppconnect.create({
   });
 })
 .catch((err) => console.log(err));
-})();
+//})();
 
 
 
