@@ -51,7 +51,7 @@ wppconnect.create({
   useChrome: false,
   autoClose: false,
   //pra funcionar no terminal, tira essa opção
-  
+  /*
    puppeteerOptions: {
     args: [
       '--no-sandbox',
@@ -61,7 +61,7 @@ wppconnect.create({
       '--single-process',
       '--no-zygote'
     ],
-  }
+  } */
   
 })
 .then(async (client) => {
@@ -101,7 +101,7 @@ async function start(client){
             const horas = agora.getHours();
             const minutos = agora.getMinutes();
 
-            if (horas==16 && minutos==0) {
+            if (horas==10 && minutos==30) {
                 console.log("É 08:00! A função será disparada.");
                 resolve(); // Finaliza a promise
             } else {
