@@ -1,6 +1,1 @@
-[submodule "tokens-belly"]
-	path = tokens
-	url = https://github.com/eduardocorreafernandes/tokens-belly
-[submodule "tokens"]
-	path = tokens
-	url = https://github.com/eduardocorreafernandes/tokens-belly.git
+
