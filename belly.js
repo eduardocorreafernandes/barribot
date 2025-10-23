@@ -16,6 +16,7 @@ async function extractTokens() {
       .pipe(unzipper.Extract({ path: sessionPath }))
       .promise(); // garante que só resolve quando terminar
     console.log('Tokens descompactados!');
+     await new Promise(res => setTimeout(res, 4000));
   } else {
     console.log('Nenhum tokens.zip encontrado. Será gerada nova sessão.');
   }
