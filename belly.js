@@ -51,7 +51,7 @@ wppconnect.create({
   useChrome: false,
   autoClose: false,
   //pra funcionar no terminal, tira essa opção
-  /*
+  
    puppeteerOptions: {
     args: [
       '--no-sandbox',
@@ -61,7 +61,7 @@ wppconnect.create({
       '--single-process',
       '--no-zygote'
     ],
-  } */
+  }
   
 })
 .then(async (client) => {
