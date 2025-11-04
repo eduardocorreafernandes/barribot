@@ -67,12 +67,30 @@ const ativar = async () => {
     await disparar_funcao(); // Aguarda até dar 08:00
     //lembrar de alterar o msg.from da send message options, deve contar o jid do grupo=>120363399351241774@g.us  
     // With buttons
-      const result =await client.sendPollMessage('556984346751@c.us', 'Escolha uma opção', [
-  'Opção 1',
-  'Opção 2',
-  'Opção 3'
-]);;
-console.log(result);
+const caminhoImagem = "C:\\Users\\eduar\\Downloads\\teste_bot\\barrigas.jpg";
+      const divulgacao =await client.sendImage('556984346751@c.us',
+      caminhoImagem,
+      'barrigas.jpg',
+      `🗓 As vendas vão até dia 23/11.
+💸 Por apenas R$90! E pra caber no bolso de todo mundo, parcelamos em até duas vezes de 45!
+
+Como garantir a sua?
+É fácil! Basta acessar o forms 👇
+https://forms.gle/XUxLfoSQZPVYExiD6
+e fazer seu pedido.
+
+Qualquer dúvida só chamar: 📲 (16997941402)
+
+Não dorme! 😴
+Garanta já a sua e venha fazer peso com a gente! 👊
+BARRIGAS CARAII!!`
+
+ 
+
+
+
+      );
+console.log(divulgacao);
 
 console.log("Função ativada após 08:00.");
 };
